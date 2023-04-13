@@ -1,20 +1,23 @@
 package com.bridgelabz;
 
+import java.util.ArrayList;
+
 public class EmployeeWage implements IEmpWage {
     public static final int PART_TIME_Work = 1;
     public static final int FUll_TIME_WORK = 2;
     int numOfCompany = 0;
-    public CompanyEmpWage[] companyEmpWageArray= new CompanyEmpWage[2];
+    ArrayList<CompanyEmpWage> companyEmpWageArray = new ArrayList<CompanyEmpWage>();
 
     public void addCompanyEmpWage(String companyName, int empRatePerHr, int numOfWorkingDays, int maxHoursPerMonth) {
-        companyEmpWageArray[numOfCompany] = new CompanyEmpWage(companyName, empRatePerHr, numOfWorkingDays, maxHoursPerMonth);
-        numOfCompany++;
+        CompanyEmpWage companyEmpWage = new CompanyEmpWage(companyName, empRatePerHr, numOfWorkingDays, maxHoursPerMonth);
+        companyEmpWageArray.add(companyEmpWage);
     }
 
     public void computeEmpWage() {
-        for (int i = 0; i < numOfCompany; i++) {
-            companyEmpWageArray[i].setTotalEmpWage(this.computeEmpWage(companyEmpWageArray[i]));
-            System.out.println(companyEmpWageArray[i]);
+        for (int i = 0; i < companyEmpWageArray.size(); i++) {
+            CompanyEmpWage companyEmpWage = companyEmpWageArray.get(i);
+            companyEmpWage.setTotalEmpWage(this.computeEmpWage(companyEmpWage));
+            System.out.println(companyEmpWage);
         }
     }
 
@@ -43,13 +46,14 @@ public class EmployeeWage implements IEmpWage {
             totalEmpWage += empWage;
         }
         return totalEmpWage;
-    }
 
+    }
     public static void main(String[] args) {
         EmployeeWage employeeWage = new EmployeeWage();
+        System.out.println("Welcome to EmployeeWage");
         employeeWage.addCompanyEmpWage("TCS", 20, 20, 100);
         employeeWage.addCompanyEmpWage("INFOSYS", 10, 15, 100);
+        employeeWage.addCompanyEmpWage("HCL", 15, 25, 100);
         employeeWage.computeEmpWage();
-
     }
 }
