@@ -2,7 +2,7 @@ package com.bridgelabz;
 
 import java.util.ArrayList;
 
-public class EmployeeWage implements IEmpWage {
+public class EmployeeWage {
     public static final int PART_TIME_Work = 1;
     public static final int FUll_TIME_WORK = 2;
     int numOfCompany = 0;
@@ -44,10 +44,11 @@ public class EmployeeWage implements IEmpWage {
             int empWage = empHrs * companyEmpWage.getEmpRatePerHour();
             totalEmpHrs += empHrs;
             totalEmpWage += empWage;
+            System.out.println("Day"+" "+  totalWorkingDays +" "+ "Emp Hrs: " + empHrs +" "+ "Emp Wage: " + empWage);
         }
         return totalEmpWage;
-
     }
+
     public static void main(String[] args) {
         EmployeeWage employeeWage = new EmployeeWage();
         System.out.println("Welcome to EmployeeWage");
